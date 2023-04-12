@@ -27,4 +27,5 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/dashboard', DashboardController::class);
     Route::resource('/ice_cream', IceCreamController::class);
     Route::resource('/pegawai', PegawaiController::class);
+    Route::get('/pegawai/search', [PegawaiController::class, 'search']);
 });

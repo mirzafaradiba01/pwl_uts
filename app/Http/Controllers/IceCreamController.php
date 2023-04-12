@@ -15,9 +15,21 @@ class IceCreamController extends Controller
      */
     public function index()
     {
-        $ice = IceCreamModel::all();
-        return view('iceCream.ice_cream')
-            ->with('ice', $ice);
+        // $ice = IceCreamModel::all();
+        // return view('iceCream.ice_cream')
+        //     ->with('ice', $ice);
+
+        if(\Illuminate\Support\Facades\Request::get('query') !== null){
+            $query = \Illuminate\Support\Facades\Request::get('query');
+            $ice = IceCreamModel::where('kode_barang', 'LIKE', '%'.$query.'%')
+                ->orWhere('nama_ice', 'LIKE', '%'.$query.'%')
+                ->orWhere('harga', 'LIKE', '%'.$query.'%')
+                ->orWhere('qty', 'LIKE', '%'.$query.'%')
+                ->paginate(5);
+        } else {
+            $ice = IceCreamModel::paginate(5);
+        }
+        return view('iceCream.ice_cream', ['ice' => $ice]);
     }
 
     /**

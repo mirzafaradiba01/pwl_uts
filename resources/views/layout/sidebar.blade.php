@@ -33,15 +33,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href={{ url('/profile') }} class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
-            <p>Profile</p>
-          </a>
-        </li>
-        <li class="nav-item">
           <a href={{ url('/ice_cream') }} class="nav-link">
             <i class="nav-icon fas fa-book"></i>
-            <p>Ice Cream</p>
+            <p>Data Ice Cream</p>
           </a>
         </li>
         <li class="nav-item">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\IceCreamModel;
 use App\Models\PegawaiModel;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,23 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawai = PegawaiModel::all();
-        return view('pegawai.pegawai')
-            ->with('pegawai', $pegawai);
+        // $pegawai = PegawaiModel::all();
+        // return view('pegawai.pegawai')
+        //     ->with('pegawai', $pegawai);
+
+        if(\Illuminate\Support\Facades\Request::get('query') !== null){
+            $query = \Illuminate\Support\Facades\Request::get('query');
+            $pegawai = PegawaiModel::where('kode_pegawai', 'LIKE', '%'.$query.'%')
+                ->orWhere('nama', 'LIKE', '%'.$query.'%')
+                ->orWhere('jk', 'LIKE', '%'.$query.'%')
+                ->orWhere('alamat', 'LIKE', '%'.$query.'%')
+                ->orWhere('hp', 'LIKE', '%'.$query.'%')
+                ->paginate(5);
+        } else {
+            $pegawai = PegawaiModel::paginate(5);
+        }
+        return view('pegawai.pegawai', ['pegawai' => $pegawai]);
+        
     }
 
     /**
@@ -113,4 +128,27 @@ class PegawaiController extends Controller
         return redirect('pegawai')
         ->with ('success', 'pegawai Berhasil Dihapus');
     }
+
+    public function search(Request $request)
+    {
+        $ice = IceCreamModel::count();
+        $pegawai = PegawaiModel::count();
+
+        $keyword = $request->input('keyword');
+        $column = $request->input('column');
+
+        $query = PegawaiModel::query();
+
+        if ($column == 'Kode') {
+            $query->where('kode_pegawai', 'LIKE', "%$keyword%");
+        } elseif ($column == 'Nama') {
+            $query->where('nama', 'LIKE', "%$keyword%");
+
+        $results = $query->get();
+
+        return view('pegawai.search_pegawai', ['results' => $results])
+            ->with('ice', $ice)
+            ->with('pegawai', $pegawai);
+    }
+}
 }

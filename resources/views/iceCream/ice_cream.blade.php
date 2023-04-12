@@ -19,18 +19,9 @@
         </div>
         <div class="card-body">
            <a href="{{ url ('ice_cream/create')}}"class="btn btn-sm btn-success my-2">Tambah Data</a>
-           <form action="ice_cream/search" method="GET">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Search" name="keyword">
-              <div class="input-group-append">
-                <select class="custom-select rounded-0" name="column">
-                  <option value="kode_barang">Kode</option>
-                  <option value="nama_ice">Nama</option>
-                </select>
-                <button type="submit" class="input-group-text"><i class="fas fa-search"></i></button>
-              </div>
-            </div> 
-          </form>
+           <form action="" method="GET" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search Ice Cream</button>
             <table class="table table-bordered table-striped">
                 <thead>
                         <tr>
@@ -71,6 +62,7 @@
                         @endif
                     </body>
             </table>
+            <div class="pagination justify-content-end mt-2">  {{ $ice->withQueryString()->links() }}</div>
         </div>
     </div>
     <!-- /.card -->
