@@ -27,8 +27,8 @@ class IceCreamController extends Controller
      */
     public function create()
     {
-        return view('iceCream.create_iceCream')
-            ->with('url_form',url('/ice_cream'));
+        return  view('iceCream.create_iceCream')
+        ->with('url_form',url('/ice_cream'));
     }
 
     /**
@@ -39,7 +39,6 @@ class IceCreamController extends Controller
      */
     public function store(Request $request)
     {
-        // Melakukan validasi data
         $request->validate([
             'kode_barang' => 'required|string|max:10|unique:ice_cream,kode_barang',
             'nama_ice' => 'required|string|max:50',
@@ -47,26 +46,20 @@ class IceCreamController extends Controller
             'qty' => 'required|integer',
         ]);
 
-        // Membuat data baru dalam database
-        $data = new IceCreamModel();
-        $data->kode_barang = $request->input('kode_barang');
-        $data->nama_ice = $request->input('nama_ice');
-        $data->harga = $request->input('harga');
-        $data->qty = $request->input('qty');
-        $data->save();
+        $data = IceCreamModel::create($request->except(['_token']));
 
-        // Jika data berhasil ditambahkan, akan kembali ke halaman utama
-        return redirect('/ice_cream')
-        ->with('success', 'Ice Cream Berhasil Ditambahkan');
+        //jika berhasil
+        return redirect('ice_cream')
+                ->with('success', 'Ice Cream Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\IceCream  $iceCream
+     * @param  \App\Models\ice_cream  $ice
      * @return \Illuminate\Http\Response
      */
-    public function show(IceCreamModel $iceCream)
+    public function show(IceCreamModel $ice)
     {
         //
     }
@@ -74,32 +67,32 @@ class IceCreamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\IceCream  $iceCream
+     * @param  \App\Models\ice_cream  $ice
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $ice_cream = IceCreamModel::find($id);
+        $ice = IceCreamModel::find($id);
         return view('iceCream.create_iceCream')
-            ->with('ice',$ice_cream)
-            ->with('url_form',url('/ice_cream/'.$id));
+                    ->with('ice',$ice)
+                    ->with('url_form',url('/ice_cream/'.$id));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\IceCream  $iceCream
+     * @param  \App\Models\ice_cream  $ice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        //Melakukan validasi data
-        $request->validate([
-            'kode_barang' => 'required|string|max:10|unique:ice_cream,kode_barang,',
-            'nama_ice' => 'required|string|max:50',
-            'harga' => 'required',
-            'qty' => 'required|integer',
+        $request ->validate([
+                'kode_barang' => 'required|string|max:10|unique:ice_cream,kode_barang,'.$id,
+                'nama_ice' => 'required|string|max:50',
+                'harga' => 'required',
+                'qty' => 'required|integer',
+
         ]);
 
         $data = IceCreamModel::where('id', '=', $id)->update($request->except(['_token','_method']));
@@ -110,13 +103,13 @@ class IceCreamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\IceCream  $iceCream
+     * @param  \App\Models\ice_cream  $ice
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         IceCreamModel::where('id', '=', $id)->delete();
         return redirect('ice_cream')
-            ->with('success', 'Ice Cream Berhasil Dihapus');
+        ->with ('success', 'Ice Cream Berhasil Dihapus');
     }
 }

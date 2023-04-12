@@ -25,8 +25,6 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Auth::routes();
 Route::middleware(['auth'])->group(function(){
     Route::resource('/dashboard', DashboardController::class);
-    Route::resource('ice_cream', IceCreamController::class)->parameter('ice_cream', 'id');
-    // Route::get('/', [DashboardController::class, 'index']);
-    // Route::resource('/food', FoodController::class);
-    // Route::resource('/drink', DrinkController::class);
+    Route::resource('/ice_cream', IceCreamController::class);
+    Route::resource('/pegawai', PegawaiController::class);
 });
