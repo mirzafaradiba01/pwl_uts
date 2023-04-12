@@ -5,7 +5,7 @@
         <img src="https://www.eatlogos.com/food_and_drinks/png/vector_ice_cream_food_logo.png" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">MIKKU-MIKMU</a>
+        <a href="#" class="d-block">MIRZA-SHOFIA</a>
       </div>
     </div>
   
