@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Models\Login;
+use Illuminate\Routing\Route as RoutingRoute;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +20,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/logout', [LoginController::class, 'logout']);
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function(){
+    // Route::get('/food/search', [FoodController::class, 'search']);
+    // Route::get('/drink/search', [DrinkController::class, 'search']);
+    Route::resource('/dashboard', DashboardController::class);
+    // Route::get('/', [DashboardController::class, 'index']);
+    // Route::resource('/food', FoodController::class);
+    // Route::resource('/drink', DrinkController::class);
+});
