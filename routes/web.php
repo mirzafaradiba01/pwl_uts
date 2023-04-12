@@ -24,9 +24,8 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 Auth::routes();
 Route::middleware(['auth'])->group(function(){
-    // Route::get('/food/search', [FoodController::class, 'search']);
-    // Route::get('/drink/search', [DrinkController::class, 'search']);
     Route::resource('/dashboard', DashboardController::class);
+    Route::resource('ice_cream', IceCreamController::class)->parameter('ice_cream', 'id');
     // Route::get('/', [DashboardController::class, 'index']);
     // Route::resource('/food', FoodController::class);
     // Route::resource('/drink', DrinkController::class);
