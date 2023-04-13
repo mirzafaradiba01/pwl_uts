@@ -13,14 +13,14 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // $pegawai = PegawaiModel::all();
         // return view('pegawai.pegawai')
         //     ->with('pegawai', $pegawai);
 
-        if(\Illuminate\Support\Facades\Request::get('query') !== null){
-            $query = \Illuminate\Support\Facades\Request::get('query');
+        if($request->get('query') !== null){
+            $query = $request->get('query');
             $pegawai = PegawaiModel::where('kode_pegawai', 'LIKE', '%'.$query.'%')
                 ->orWhere('nama', 'LIKE', '%'.$query.'%')
                 ->orWhere('jk', 'LIKE', '%'.$query.'%')

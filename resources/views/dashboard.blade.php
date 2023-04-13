@@ -6,12 +6,12 @@
     <div class="col-sm-6">
         <h1>Dashboard</h1>
     </div>
-    <div class="col-sm-6">
+    {{-- <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="#">Menu</a></li>
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
-    </div>
+    </div> --}}
   </div>
 </div><!-- /.container-fluid -->
 </section>
@@ -25,7 +25,7 @@
   <div class="row">
     <div class="col-lg-6 col-4">
       <!-- small box -->
-      <div class="small-box bg-info">
+      <div class="small-box bg-success">
         <div class="inner">
           <h3>Ice Cream</h3>
           <p>Ice cream adalah sebuah makanan beku yang terbuat dari campuran susu, gula, dan
@@ -45,7 +45,7 @@
     <!-- ./col -->
     <div class="col-lg-6 col-4">
       <!-- small box -->
-      <div class="small-box bg-info">
+      <div class="small-box bg-success">
         <div class="inner">
           <h3>Data Pegawai</h3>
           <p>Pegawai ice cream adalah seseorang yang bekerja di sebuah toko atau gerai ice cream dan bertanggung jawab untuk 

@@ -13,14 +13,14 @@ class IceCreamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // $ice = IceCreamModel::all();
         // return view('iceCream.ice_cream')
         //     ->with('ice', $ice);
 
-        if(\Illuminate\Support\Facades\Request::get('query') !== null){
-            $query = \Illuminate\Support\Facades\Request::get('query');
+        if($request->get('query') !== null){
+            $query = $request->get('query');
             $ice = IceCreamModel::where('kode_barang', 'LIKE', '%'.$query.'%')
                 ->orWhere('nama_ice', 'LIKE', '%'.$query.'%')
                 ->orWhere('harga', 'LIKE', '%'.$query.'%')
